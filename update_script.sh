@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 echo 'updating your system'
 sudo apt -y update && sudo apt -y upgrade
 
@@ -13,15 +14,26 @@ echo 'enabling firewall'
 ufw enable
 
 echo 'installing useful snap packages'
-sudo apt -y install plocate && sudo apt -y install source-highlight && sudo apt -y install gnome-shell-extension-manager
+sudo apt -y install plocate && sudo apt -y install source-highlight && sudo apt -y install gnome-shell-extension-manager && sudo apt -y install curl 
 
 echo 'enabling source highlight'
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s" >> ~/.bashrc
 export LESS=" -R " >> ~/.bashrc
 
+echo 'installing custom hot corners extension'
+curl -L -o custom-hot-corners-extended@G-dH.github.com.zip https://github.com/G-dH/custom-hot-corners-extended/releases/latest/download/custom-hot-corners-extended@G-dH.github.com.zip   
+gnome-extensions install --force custom-hot-corners-extended@G-dH.github.com.zip   
+gnome-extensions enable custom-hot-corners-extended@G-dH.github.com   
+
 echo 'installing visual studio code'
-chmod 666 code_1.103.1-1755017277_amd64.deb
-mv code_1.103.1-1755017277_amd64.deb /tmp
-sudo apt install /tmp/code_1.103.1-1755017277_amd64.deb
+curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/vscode.gpg > /dev/null   
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/vscode.gpg] https://packages.microsoft.com/repos/vscode stable main | sudo tee /etc/apt/sources.list.d/vscode.list   
+sudo apt update && sudo apt install code   
+
+echo 'setting up system preferences'
+gsettings set org.gnome.shell favorite-apps "['opera_opera.', 'code_code.desktop', 'org.gnome.Nautilus.desktop', 'gnome-terminal.desktop',]"
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark   
+gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+
 
 echo "thank you for using Xander's update drive"
