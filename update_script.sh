@@ -40,4 +40,5 @@ gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false
 echo 'cleaning up'
 sudo apt -y autoremove
 
+echo 'hot corners extension needs to be configured. Click the circle on the far right of your task bar (show it by hovering your cursor over the bottom of the screen.) Click Extension manager, click the gear next to Custom Hot Corners - Extended. You can customize from there what certain buttons do.'
 echo "thank you for using Xander's update drive"
