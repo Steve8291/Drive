@@ -7,24 +7,40 @@ sudo apt -y update && sudo apt -y upgrade
 echo 'updating snap packages'
 sudo snap refresh
 
-echo 'installing opera'
-sudo snap install opera
+if ! snap list | grep -q 'opera'; then
+    echo 'installing opera'
+    sudo snap install opera
+else
+    echo 'opera already installed, skipping'
+fi
 
 echo 'enabling firewall'
 ufw enable
 
-echo 'installing useful packages'
-sudo apt -y install plocate curl
+if ! snap list | grep -q 'plocate'; then
+    echo 'installing useful packages'
+    sudo apt -y install plocate curl
+else 
+    echo 'plocate already installed, skipping'
+fi
 
-echo 'enabling source highlight for less'
-sudo apt -y install source-highlight
-export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s" >> ~/.bashrc
-export LESS=" -R " >> ~/.bashrc
+if ! snap list | grep -q 'source-highlight'; then
+    echo 'enabling source highlight for less'
+    sudo apt -y install source-highlight
+    export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s" >> ~/.bashrc
+    export LESS=" -R " >> ~/.bashrc
+else 
+    echo 'source-highlight already installed, skipping'
+fi
 
-echo 'installing custom hot corners extension'
-curl -L -o custom-hot-corners-extended@G-dH.github.com.zip https://github.com/G-dH/custom-hot-corners-extended/releases/latest/download/custom-hot-corners-extended@G-dH.github.com.zip && mv custom-hot-corners-extended@G-dH.github.com.zip /tmp/
-gnome-extensions install --force /tmp/custom-hot-corners-extended@G-dH.github.com.zip
-gnome-extensions enable custom-hot-corners-extended@G-dH.github.com
+if ! find 'custom-hot-corners*'; then
+    echo 'installing custom hot corners extension'
+    curl -L -o custom-hot-corners-extended@G-dH.github.com.zip https://github.com/G-dH/custom-hot-corners-extended/releases/latest/download/custom-hot-corners-extended@G-dH.github.com.zip && mv custom-hot-corners-extended@G-dH.github.com.zip /tmp/
+    gnome-extensions install --force /tmp/custom-hot-corners-extended@G-dH.github.com.zip
+    gnome-extensions enable custom-hot-corners-extended@G-dH.github.com
+else
+    echo 'custom hot corners extension already installed, skipping'
+fi
 
 echo 'installing visual studio code'
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/packages.microsoft.gpg 
