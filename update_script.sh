@@ -119,19 +119,23 @@ else
     echo 'system preferences already set, skipping'
 fi
 
-if $githubemail | echo $? |grep -q "127" ;then 
+githubusername=$(git config user.name)
+
+read -p "Is your github username: $githubusername ? (y/n)" answer
+if [ "$answer" != "${answer#[Yy]}" ] ;then
     echo 'Configuring github'
     read -p "Enter Github Username: " githubusername
     echo 'put in your Github email'
     read -p "enter Github Email:" githubemail
     git config --global user.name "$githubusername"
     git config --global user.email "$githubemail"
-else 
-    echo 'Github already configured, skipping'
+else
+    echo "Github already configured, skipping"
 fi
+
 
 echo 'cleaning up'
 sudo apt -y autoremove
 
 echo 'hot corners extension needs to be configured. Click the circle on the far right of your task bar (show it by hovering your cursor over the bottom of the screen.) Click Extension manager, click the gear next to Custom Hot Corners - Extended. You can customize from there what certain buttons do.'
-echo "thank you for using Xander's update drive"corners*'; 
+echo "thank you for using Xander's update drive"
