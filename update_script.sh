@@ -17,31 +17,33 @@ fi
 echo 'enabling firewall'
 ufw enable
 
-if ! dpkg -l | grep -q 'plocate'; then
+if ! dpkg -l | grep -q 'ii  plocate'; then
     echo 'plocate'
     sudo apt -y install plocate
 else 
     echo 'plocate already installed, skipping'
 fi
 
-if ! dpkg -l | grep -q 'curl'; then
+if ! dpkg -l | grep -q 'ii  curl'; then
     echo 'curl'
     sudo apt -y install curl
 else 
     echo 'curl already installed, skipping'
 fi
 
-if ! dpkg -l | grep -q 'source-highlight'; then
+if ! dpkg -l | grep -q 'ii  source-highlight'; then
     echo 'enabling source highlight for less'
     sudo apt -y install source-highlight
 else 
     echo 'source-highlight already installed, skipping'
 fi
 
-if ! grep -q 'source-highlight' ~/bashrc; then
+if ! grep -q 'source-highlight' ~/.bashrc; then
     echo 'configuring less to use source highlight'
-    echo 'export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s' >> ~/.bashrc
+    echo -e '\n # enable source highlighting in less' >> ~/.bashrc
+    echo 'export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"' >> ~/.bashrc
     echo "export LESS=' -cR '" >> ~/.bashrc
+    source ~/.bashrc
 else
     echo 'less already configured to use source highlight, skipping'
 fi
