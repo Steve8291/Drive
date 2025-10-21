@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 
 echo 'updating your system'
@@ -79,7 +79,7 @@ gsettings show org.gnome.shell.extensions.dash-to-dock multi-monitor true
 
 
 git config --global user.name
-read -p 'Is your github username? (y/n)' answer
+read -p 'Is your github username? (y/n): ' answer
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     echo "Github already configured, skipping"
 else
