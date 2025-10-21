@@ -24,6 +24,13 @@ else
     echo 'plocate already installed, skipping'
 fi
 
+if ! dpkg -l | grep -q 'ii  gnome-shell-extension-manager'; then
+    echo 'installing gnome shell extension manager'
+    sudo apt -y install gnome-shell-extension-manager
+else 
+    echo 'gnome shell extension manager already installed, skipping'
+fi
+
 if ! dpkg -l | grep -q 'ii  curl'; then
     echo 'installing curl'
     sudo apt -y install curl
@@ -48,15 +55,6 @@ else
     source ~/.bashrc
 fi
 
-# if [ !  -d "~/.local/share/gnome-shell/extensions/custom-hot-corners-extended@G-dH.github.com" ]; then
-#     echo 'installing custom hot corners extension'
-#     curl -L -o /tmp/custom-hot-corners-extended@G-dH.github.com.zip https://github.com/G-dH/custom-hot-corners-extended/releases/latest/download/custom-hot-corners-extended@G-dH.github.com.zip
-#     gnome-extensions install --force /tmp/custom-hot-corners-extended@G-dH.github.com.zip
-#     gnome-extensions enable custom-hot-corners-extended@G-dH.github.com
-# else"~/.local/share/gnome-shell/extensions/custom-hot-corners-extended@G-dH.github.com"
-#     echo 'custom hot corners extension already installed, skipping'
-# fi
-
 if ! find /etc/apt/sources.list.d/ -name 'vscode.sources'; then
     echo 'installing visual studio code'
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/packages.microsoft.gpg 
@@ -68,7 +66,6 @@ fi
 
 
 echo 'setting up system preferences'
-sudo apt -y install gnome-shell-extension-manager
 gsettings set org.gnome.shell favorite-apps "['opera_opera.desktop', 'firefox_firefox.desktop, 'org.gnome.Terminal.desktop', 'org.gnome.Settings.desktop', 'code.desktop', 'org.gnome.Nautilus.desktop']"
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
