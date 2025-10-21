@@ -1,11 +1,11 @@
-#!/bin/bash
+!/bin/bash
 
 
-# echo 'updating your system'
-# sudo apt -y update && sudo apt -y upgrade
+echo 'updating your system'
+sudo apt -y update && sudo apt -y upgrade
 
-# echo 'updating snap packages'
-# sudo snap refresh
+echo 'updating snap packages'
+sudo snap refresh
 
 if ! snap list | grep -q '^opera'; then
     echo 'installing opera'
@@ -66,19 +66,17 @@ else
     echo 'visual studio code already installed, skipping'
 fi
 
-# if ! gsettings get org.gnome.shell favorite-apps | grep -q 'opera_opera'; then
-#     echo 'setting up system preferences'
-#     sudo apt -y install gnome-shell-extension-manager
-#     gsettings set org.gnome.shell favorite-apps "['opera_opera.desktop', 'org.gnome.Terminal.desktop', 'code.desktop', 'org.gnome.Nautilus.desktop']"
-#     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-#     gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
-#     gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
-#     gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false
-    # gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
-    # gsettings show org.gnome.shell.extensions.dash-to-dock multi-monitor true
-# else
-#     echo 'system preferences already set, skipping'
-# fi
+
+echo 'setting up system preferences'
+sudo apt -y install gnome-shell-extension-manager
+gsettings set org.gnome.shell favorite-apps "['opera_opera.desktop', 'firefox_firefox.desktop, 'org.gnome.Terminal.desktop', 'org.gnome.Settings.desktop', 'code.desktop', 'org.gnome.Nautilus.desktop']"
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
+gsettings show org.gnome.shell.extensions.dash-to-dock multi-monitor true
+
 
 git config --global user.name
 read -p 'Is your github username? (y/n)' answer
@@ -93,8 +91,8 @@ else
 fi
 
 
-# echo 'cleaning up'
-# sudo apt -y autoremove
+echo 'cleaning up'
+sudo apt -y autoremove
 
-# echo 'hot corners extension needs to be configured. Click the circle on the far right of your task bar (show it by hovering your cursor over the bottom of the screen.) Click Extension manager, click the gear next to Custom Hot Corners - Extended. You can customize from there what certain buttons do.'
-# echo "thank you for using Xander's update drive"
+echo 'hot corners extension needs to be configured. Click the circle on the far right of your task bar (show it by hovering your cursor over the bottom of the screen.) Click Extension manager, click the gear next to Custom Hot Corners - Extended. You can customize from there what certain buttons do.'
+echo "thank you for using Xander's update drive"
