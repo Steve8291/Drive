@@ -48,14 +48,14 @@ else
     source ~/.bashrc
 fi
 
-# if [ !  -d "~/.local/share/gnome-shell/extensions/custom-hot-corners-extended@G-dH.github.com" ]; then
-#     echo 'installing custom hot corners extension'
-#     curl -L -o custom-hot-corners-extended@G-dH.github.com.zip https://github.com/G-dH/custom-hot-corners-extended/releases/latest/download/custom-hot-corners-extended@G-dH.github.com.zip && mv custom-hot-corners-extended@G-dH.github.com.zip /tmp/
-#     gnome-extensions install --force /tmp/custom-hot-corners-extended@G-dH.github.com.zip
-#     gnome-extensions enable custom-hot-corners-extended@G-dH.github.com
-# else
-#     echo 'custom hot corners extension already installed, skipping'
-# fi
+if [ !  -d "~/.local/share/gnome-shell/extensions/custom-hot-corners-extended@G-dH.github.com" ]; then
+    echo 'installing custom hot corners extension'
+    curl -L -o /tmp/custom-hot-corners-extended@G-dH.github.com.zip https://github.com/G-dH/custom-hot-corners-extended/releases/latest/download/custom-hot-corners-extended@G-dH.github.com.zip
+    gnome-extensions install --force /tmp/custom-hot-corners-extended@G-dH.github.com.zip
+    gnome-extensions enable custom-hot-corners-extended@G-dH.github.com
+else
+    echo 'custom hot corners extension already installed, skipping'
+fi
 
 if ! find /etc/apt/sources.list.d/ -name 'vscode.sources'; then
     echo 'installing visual studio code'
@@ -78,17 +78,17 @@ fi
 #     echo 'system preferences already set, skipping'
 # fi
 
-echo $githubusername
-read -p 'Is your github username? (y/n)' answer
-if [ "$answer" != "${answer#[Yy]}" ] ;then
-    echo "Github already configured, skipping"
-else
-    echo 'Configuring github'
-    read -p "Enter Github Username: " githubusername
-    read -p "Enter Github Email: " githubemail
-    # git config --global user.name "$githubusername"
-    # git config --global user.email "$githubemail"
-fi
+# echo $githubusername
+# read -p 'Is your github username? (y/n)' answer
+# if [ "$answer" != "${answer#[Yy]}" ] ;then
+#     echo "Github already configured, skipping"
+# else
+#     echo 'Configuring github'
+#     read -p "Enter Github Username: " githubusername
+#     read -p "Enter Github Email: " githubemail
+#     # git config --global user.name "$githubusername"
+#     # git config --global user.email "$githubemail"
+# fi
 
 
 # echo 'cleaning up'
