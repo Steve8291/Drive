@@ -107,21 +107,20 @@ gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
 gsettings show org.gnome.shell.extensions.dash-to-dock multi-monitor true
 
+cur_git_user=$(git config --global user.name)
 
-git config --global user.name
-read -p 'Is your github username? (y/n): ' answer
-if [ "$answer" != "${answer#[Yy]}" ] ;then
-    echo "Github already configured, skipping"
-else
+if [ -z "$cur_git_user" ]; then
     echo 'Configuring github'
     read -p "Enter Github Username: " githubusername
     read -p "Enter Github Email: " githubemail
     git config --global user.name "$githubusername"
     git config --global user.email "$githubemail"
+else
+    echo "Github already configured with username ${cur_git_user}, skipping"
 fi
 
 
 echo 'cleaning up'
 sudo apt -y autoremove
 
-echo "thank you for using Xander's update drive" 
+echo "thank you for using Xander's update CompSci script!" 
