@@ -1,5 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env/bash
 
+
+if ! find /etc/apt/sources.list.d/ -name 'vscode.sources'; then
+    echo 'Adding Visual Studio Code repository'
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/packages.microsoft.gpg 
+    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+else 
+    echo 'visual studio code repo already installed, skipping'
+fi
 
 echo 'updating your system'
 sudo apt -y update && sudo apt -y upgrade
@@ -17,11 +25,46 @@ fi
 echo 'enabling firewall'
 sudo ufw enable
 
-if ! dpkg -l | grep -q 'ii  plocate'; then
+if ! dpkg -l | grep -q 'ii plocate'; then
     echo 'installing plocate'
     sudo apt -y install plocate
 else 
     echo 'plocate already installed, skipping'
+fi
+
+if ! dpkg -l | grep -q 'ii smartmontools'; then
+    echo 'installing smartmontools'
+    sudo apt -y install smartmontools
+else 
+    echo 'smartmontools already installed, skipping'
+fi
+
+if ! dpkg -l | grep -q 'ii code'; then
+    echo 'installing VSCode'
+    sudo apt -y install code
+else 
+    echo 'VSCode already installed, skipping'
+fi
+
+if ! dpkg -l | grep -q 'ii  shellcheck'; then
+    echo 'installing shellcheck'
+    sudo apt -y install shellcheck
+else 
+    echo 'shellcheck already installed, skipping'
+fi
+
+if ! dpkg -l | grep -q 'ii glmark2'; then
+    echo 'installing glmark2'
+    sudo apt -y install glmark2
+else 
+    echo 'glmark2 already installed, skipping'
+fi
+
+if ! dpkg -l | grep -q 'ii net-tools'; then
+    echo 'installing net-tools'
+    sudo apt -y install net-tools
+else 
+    echo 'net-tools already installed, skipping'
 fi
 
 if ! dpkg -l | grep -q 'ii  gnome-shell-extension-manager'; then
@@ -55,14 +98,7 @@ else
     source ~/.bashrc
 fi
 
-if ! find /etc/apt/sources.list.d/ -name 'vscode.sources'; then
-    echo 'installing visual studio code'
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/keyrings/packages.microsoft.gpg 
-    echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
-    sudo apt update && sudo apt install code
-else 
-    echo 'visual studio code already installed, skipping'
-fi
+
 
 
 echo 'setting up system preferences'
@@ -91,4 +127,4 @@ fi
 echo 'cleaning up'
 sudo apt -y autoremove
 
-echo "thank you for using Xander's update drive"
+echo "thank you for using Xander's update drive" 
