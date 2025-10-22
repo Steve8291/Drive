@@ -46,7 +46,7 @@ else
     echo 'VSCode already installed, skipping'
 fi
 
-if ! dpkg -l | grep -q 'ii  shellcheck'; then
+if ! dpkg -l | grep -q 'ii shellcheck'; then
     echo 'installing shellcheck'
     sudo apt -y install shellcheck
 else 
@@ -97,9 +97,6 @@ else
     echo "export LESS=' -cR '" >> ~/.bashrc
     source ~/.bashrc
 fi
-
-
-
 
 echo 'setting up system preferences'
 gsettings set org.gnome.shell favorite-apps "['opera_opera.desktop', 'firefox_firefox.desktop, 'org.gnome.Terminal.desktop', 'org.gnome.Settings.desktop', 'code.desktop', 'org.gnome.Nautilus.desktop']"

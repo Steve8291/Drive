@@ -14,3 +14,9 @@ Thank you for using Xanders Update Drive
 5) Click install and confirm the installation
 6) In the top of the manager go back to installed extensions and enable Custom Hot Corners if its not already
 7) Go to the gear next to the enable switch and set it up to your liking
+
+## Setup Shellcheck in Vscode
+
+1) Open up VSCode (located on your taskbar)
+2) In the side column labeled extensions search for shellcheck
+3) Install the one with the icon of a magnifying glass on a seashell
