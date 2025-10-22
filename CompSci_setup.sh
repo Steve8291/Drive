@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/usr/bin/env bash
 
 
 if ! find /etc/apt/sources.list.d/ -name 'vscode.sources'; then
